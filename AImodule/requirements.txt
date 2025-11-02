@@ -1,0 +1,11 @@
+torch>=1.9.0
+torchvision>=0.10.0
+transformers>=4.0.0
+pandas
+numpy
+Pillow
+scikit-learn
+matplotlib
+tqdm
+opencv-python
+albumentations
