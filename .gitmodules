@@ -1,0 +1,3 @@
+[submodule "MobileApplication"]
+	path = MobileApplication
+	url = https://github.com/khandragon/DermAssist-MobileApplication
