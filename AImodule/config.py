@@ -11,7 +11,7 @@ class Config:
 
         # Model
         self.model_name = "google/vit-base-patch16-224"
-        self.num_classes = 7
+        self.num_classes = 8
 
         # Training
         self.epochs = 10
