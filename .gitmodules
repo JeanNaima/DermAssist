@@ -1,3 +1,6 @@
 [submodule "MobileApplication"]
 	path = MobileApplication
 	url = https://github.com/khandragon/DermAssist-MobileApplication
+[submodule "DermAssistBackend"]
+	path = DermAssistBackend
+	url = https://github.com/khandragon/DermAssistBackend
