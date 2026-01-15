@@ -8,7 +8,7 @@ import numpy as np
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
 import os
-
+import csv
 
 class SkinLesionPredictor:
     def __init__(self, model_path):
@@ -65,20 +65,43 @@ class SkinLesionPredictor:
         except Exception as e:
             return f"Error during prediction: {str(e)}", 0.0, {}
 
+    # This will return the diagnosis from the CSV data given an image name
+    # change the return varable to the appropriate column index as needed
+    def csv_diagnosis(self, csv_data, image_name):
+        for row in csv_data:
+            if row[0] == image_name:
+                return row[9]
+        return "Unknown"
 
 # Example usage
 if __name__ == "__main__":
     # Initialize predictor
-    predictor = SkinLesionPredictor("saved_models/best_model.pth")
+    predictor = SkinLesionPredictor("saved_models/best_model2.0.pth")
 
     # Test prediction
     test_image = "data/images/ISIC_0034524.jpg"  # Replace with actual image
-    if os.path.exists(test_image):
-        class_name, confidence, all_probs = predictor.predict(test_image)
-        print(f"Predicted: {class_name}")
-        print(f"Confidence: {confidence:.4f}")
-        print("All probabilities:")
-        for cls, prob in all_probs.items():
-            print(f"  {cls}: {prob:.4f}")
+    test_dir = "AImodule/data/images/Challenge2018/"  # Directory with test images
+
+    csv_file = "AImodule/data/challenge-2018.csv" #This is the csv file path that has all the diagnosis info
+    csv_data = []
+
+    with open(csv_file, newline='') as datasetfile:
+        reader = csv.reader(datasetfile)
+        for row in reader:
+            csv_data.append(row)
+    csv_data = csv_data[1:]  # Skip header that is just text
+
+    if os.path.exists(test_dir):
+        for img_name in os.listdir(test_dir):
+            img_path = os.path.join(test_dir, img_name)
+            class_name, confidence, all_probs = predictor.predict(img_path)
+            print(f"Image: {img_name}")
+            print(f"Predicted: {class_name}")
+            print(f"Actual diagnosis: {predictor.csv_diagnosis(csv_data, img_name)}") 
+            print(f"Confidence: {confidence:.4f}")
+            print("All probabilities:")
+            for cls, prob in all_probs.items():
+                print(f"  {cls}: {prob:.4f}")
+            print("-" * 30)
     else:
-        print(f"Test image not found: {test_image}")
+        print(f"Test directory not found: {test_dir}")

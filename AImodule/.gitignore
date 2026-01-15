@@ -1,0 +1,10 @@
+*.log
+test_output.txt
+
+.idea/
+saved_models/
+data/images/
+.vscode/
+__pycache__/
+.DS_Store
+env/
