@@ -17,7 +17,7 @@ python -m venv .venv
 Using Bash
 
 ```
-.source .venv/Scripts/activate
+source .venv/Scripts/activate
 ```
 
 or
