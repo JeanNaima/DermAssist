@@ -8,3 +8,4 @@ data/images/
 __pycache__/
 .DS_Store
 env/
+/py-api/.venv/
