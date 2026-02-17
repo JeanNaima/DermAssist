@@ -14,7 +14,7 @@ services:
       - analyzer
 
   analyzer:
-    build: ./DermAssistAIModule/py-api
+    build: ./py-api
     restart: unless-stopped
     environment:
       - PORT=8000
