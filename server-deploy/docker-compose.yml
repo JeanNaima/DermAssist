@@ -1,0 +1,22 @@
+services:
+  api:
+    build: ./DermAssistBackend
+    restart: unless-stopped
+    environment:
+      - PORT=3000
+      - PYTHON_API_URL=http://analyzer:8000
+      - GOOGLE_APPLICATION_CREDENTIALS=/run/secrets/firebase.json
+    volumes:
+      - ./secrets/serviceAccountKey.json:/run/secrets/firebase.json:ro
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - analyzer
+
+  analyzer:
+    build: ./DermAssistAIModule/py-api
+    restart: unless-stopped
+    environment:
+      - PORT=8000
+    expose:
+      - "8000"
