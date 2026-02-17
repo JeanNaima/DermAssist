@@ -1,0 +1,26 @@
+*.log
+test_output.txt
+
+saved_models/
+data/images/
+/py-api/.venv/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Local env vars
+.env
+.env.*

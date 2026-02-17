@@ -1,0 +1,9 @@
+# Local env for deploy
+.env
+.env.*
+
+# ignore exmaple 
+!.env.example
+
+# Secrets (never commit)
+secrets/
