@@ -4,6 +4,6 @@
 [submodule "DermAssistBackend"]
 	path = DermAssistBackend
 	url = https://github.com/khandragon/DermAssistBackend
-[submodule "DermAssistAIModule"]
+[submodule "DermAssistAIModules"]
 	path = DermAssistAIModule
-	url = https://github.com/khandragon/DermAssistAIModule.git
+	url = https://github.com/khandragon/DermAssistAIModules
