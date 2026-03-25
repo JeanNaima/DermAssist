@@ -1,0 +1,31 @@
+services:
+  ai-api:
+    build:
+      context: ./ai
+      dockerfile: Dockerfile
+    container_name: ai-api
+    ports:
+      - "8000:8000"
+    environment:
+      SKIN_GATEKEEPER_WEIGHTS: /app/artifacts/private/skin_gatekeeper/best_resnet18_skin_filter.pt
+      SKIN_GATEKEEPER_CLASS_MAP: /app/artifacts/private/skin_gatekeeper/class_to_idx.json
+      DERMASSIST_WEIGHTS: /app/artifacts/private/dermassist/saved_models/best_model4.5.pth
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      AI_API_BASE_URL: http://ai-api:8000
+      GOOGLE_APPLICATION_CREDENTIALS: /run/secrets/serviceAccountKey.json
+      FIREBASE_STORAGE_BUCKET: pocket-dermassist.firebasestorage.app
+    volumes:
+      - ./secrets/serviceAccountKey.json:/run/secrets/serviceAccountKey.json:ro
+    depends_on:
+      - ai-api
+    restart: unless-stopped
