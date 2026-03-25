@@ -6,16 +6,16 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     libglib2.0-0 \
-    libgl1 \
     libsm6 \
     libxext6 \
-    libxrender-dev \
+    libxrender1 \
+    libgl1 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+COPY requirements.prod.txt .
 
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+    pip install --no-cache-dir -r requirements.prod.txt
 
 COPY packages ./packages
 COPY services ./services
