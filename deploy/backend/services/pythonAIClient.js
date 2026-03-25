@@ -1,7 +1,7 @@
 const axios = require("axios");
 const FormData = require("form-data");
 
-const PYTHON_API_BASE = process.env.PYTHON_API_BASE || "http://127.0.0.1:8000";
+const AI_API_BASE_URL = process.env.AI_API_BASE_URL || "http://ai-api:8000";
 
 function boolField(value) {
   return value ? "true" : "false";
@@ -36,7 +36,7 @@ async function postImageToPython(routePath, { file, requestId, fields = {} }) {
   const form = buildImageForm(file, fields);
 
   try {
-    const resp = await axios.post(`${PYTHON_API_BASE}${routePath}`, form, {
+    const resp = await axios.post(`${AI_API_BASE_URL}${routePath}`, form, {
       headers: {
         ...form.getHeaders(),
         ...(requestId ? { "x-request-id": String(requestId) } : {}),
