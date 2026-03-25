@@ -1,0 +1,3 @@
+deploy/ai/artifacts/private/**/*.pth
+deploy/ai/artifacts/private/**/*.pt
+deploy/ai/artifacts/private/**/*.json
