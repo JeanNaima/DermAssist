@@ -24,6 +24,10 @@ COPY artifacts ./artifacts
 RUN pip install --no-cache-dir ./packages/dermassist && \
     pip install --no-cache-dir ./packages/skin_gatekeeper
 
+ENV SKIN_GATEKEEPER_WEIGHTS=/app/artifacts/private/skin_gatekeeper/best_resnet18_skin_filter.pt
+ENV SKIN_GATEKEEPER_CLASS_MAP=/app/artifacts/private/skin_gatekeeper/class_to_idx.json
+ENV DERMASSIST_WEIGHTS=/app/artifacts/private/dermassist/saved_models/best_model4.5.pth
+
 EXPOSE 8000
 
 CMD ["uvicorn", "services.inference_api.app:app", "--host", "0.0.0.0", "--port", "8000"]

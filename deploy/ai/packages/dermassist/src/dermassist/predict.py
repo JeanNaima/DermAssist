@@ -12,6 +12,10 @@ from albumentations.pytorch import ToTensorV2
 import os
 import csv
 
+DERMASSIST_MODEL_PATH = os.getenv(
+    "DERMASSIST_WEIGHTS",
+    "/app/artifacts/private/dermassist/saved_models/best_model4.5.pth",
+)
 
 class SkinLesionPredictor:
     def __init__(self, model_path):
